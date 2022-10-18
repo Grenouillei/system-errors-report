@@ -1,4 +1,8 @@
 
+    $(document).ready(function (){
+        $('.js-reports-form').trigger('input');
+    });
+
     $(document).on('click','.js-model-delete',function (event){
         event.preventDefault();
         remove($(this).data('route'));
@@ -29,8 +33,7 @@
             contentType: 'application/json; charset=utf-8',
             headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
         }).done( function (response){
-            if (response.content)
-                $('.reports-table').html(response.content);
+            setContent(response);
         });
     });
 
@@ -74,7 +77,24 @@
             contentType: 'application/json; charset=utf-8',
             headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
         }).done( function (response){
-            if (response.content)
-                $('.reports-table').html(response.content);
+            setContent(response);
         });
     });
+
+
+    function setContent(response){
+        data.labels = [];
+        data.datasets[0].data = [];
+        data.datasets[0].backgroundColor = [];
+        Object.keys(response.charts)
+            .forEach(function eachKey(key) {
+                data.labels.push(key);
+                data.datasets.forEach(element =>  element.data.push(response.charts[key].count));
+                data.datasets.forEach(element =>  element.backgroundColor.push(response.charts[key].color));
+            });
+        if (response.content)
+            $('.reports-table').html(response.content);
+        else
+            $('.reports-table').html('');
+        myChart.update();
+    }

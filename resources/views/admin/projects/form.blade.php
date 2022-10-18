@@ -24,6 +24,11 @@
                             <input type="text" name="link" class="form-control" id="link" placeholder="Link" value="{{$model->link ?? old('link')}}">
                         </div>
                         <br>
+                        <div class="form-group">
+                            <label for="Color">Color</label>
+                            <input type="color" name="color" class="form-control" id="color" placeholder="color" value="{{$model->color ?? old('color')}}">
+                        </div>
+                        <br>
                         <div class="form-check">
                             <label class="form-check-label" for="active">Active</label>
                             <input type="checkbox" name="active" class="form-check-input" id="active" @if(isset($model) && $model->active) checked @endif value="1">

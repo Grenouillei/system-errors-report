@@ -23,6 +23,14 @@
                             <label for="email">Email</label>
                             <input type="email" name="email" required class="form-control" id="email" placeholder="Email" value="{{$model->email ?? old('email')}}">
                         </div>
+                        <div class="form-group">
+                            <select name="roles[]" class="form-control select_select2" data-fouc multiple data-placeholder="Roles" >
+                                <option value="">Roles</option>
+                                @foreach($roles as $role)
+                                    <option value="{{$role->id}}" @foreach($model->roles as $userRole) @if($userRole->id == $role->id) selected @endif @endforeach>{{$role->title}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <br>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     @if(isset($model->id))

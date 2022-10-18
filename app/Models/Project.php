@@ -14,5 +14,6 @@ class Project extends Model
         'alias',
         'link',
         'active',
+        'color',
     ];
 }

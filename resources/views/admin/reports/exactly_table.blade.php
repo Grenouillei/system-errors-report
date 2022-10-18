@@ -8,8 +8,8 @@
 @if($models)
     @foreach($models as $item)
         <tr class="table-primary">
-            <td><p class="ml-4">{{$item->file}}</p></td>
-            <td><p class="ml-4">{{$item->line}}</p></td>
+            <td class="hovertext" data-hover="{{$item->message}}"><p class="ml-4">{{$item->file}}</p></td>
+            <td><p class="ml-4" >{{$item->line}}</p></td>
             <td><p class="ml-4">{{$item->created_at}}</p></td>
             <td></td>
         </tr>

@@ -48,11 +48,11 @@ class AdminController extends Controller
 
     private function getMenu(){
         $collect = [];
-            array_push($collect,['title'=>'Administrator','link'=>'admin-index']);
+            array_push($collect,['title'=>'Reports','link'=>'reports.index']);
+            array_push($collect,['title'=>'Projects','link'=>'projects.index']);
+            array_push($collect,['title'=>'Telegram','link'=>'telegrams.index']);
             array_push($collect,['title'=>'Users','link'=>'users.index']);
             array_push($collect,['title'=>'Roles','link'=>'roles.index']);
-            array_push($collect,['title'=>'Projects','link'=>'projects.index']);
-            array_push($collect,['title'=>'Reports','link'=>'reports.index']);
         return $collect;
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
@@ -71,7 +72,11 @@ class UserController extends AdminController
      */
     public function edit(User $user)
     {
-        $this->content =  view('admin.users.form')->with(['model' => $user,'title' => $this->title])->render();
+        $this->content =  view('admin.users.form')->with([
+            'model' => $user,
+            'title' => $this->title,
+            'roles' => Role::all()
+        ])->render();
         return $this->renderOutput();
     }
 

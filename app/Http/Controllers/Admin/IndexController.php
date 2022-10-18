@@ -13,6 +13,7 @@ class IndexController extends AdminController
      */
     public function index()
     {
+        return redirect()->route('reports.index');
         $this->content = view('admin.home')->render();
         return $this->renderOutput();
     }

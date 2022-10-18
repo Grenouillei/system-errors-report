@@ -26,8 +26,8 @@
                                 <tr>
                                     <th scope="row">{{$model->id}}</th>
                                     <td>{{$model->title}}</td>
-                                    <td>{{$model->link}}</td>
-                                    <td>{{$model->active}}</td>
+                                    <td><a href="{{$model->link}}" target="_blank">{{$model->link}}</a></td>
+                                    <td>{{$model->active ? 'Yes' : 'No'}}</td>
                                     <td>
                                         <a href="{{route('projects.edit',$model->id)}}"><button type="button" class="btn btn-primary">Edit</button></a>
                                     </td>

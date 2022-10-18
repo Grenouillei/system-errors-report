@@ -13,6 +13,7 @@ class UserService
 
     public function store(Request $request,User $user){
         $user->fill($request->only($user->getFillable()));
+        $user->roles()->sync($request->roles);
         $user->save();
     }
 

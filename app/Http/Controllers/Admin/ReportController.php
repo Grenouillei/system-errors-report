@@ -25,10 +25,9 @@ class ReportController extends AdminController
      */
     public function index(Request $request,Report $report)
     {
-        $reports = $this->service->getAll($request,$report);
         $this->content = view('admin.reports.index')->with([
-            'models'=>$reports,
             'projects'=> Project::all(),
+            'charts'=> $this->service->getContentForChart($request,$report),
             'title' => $this->title
         ])->render();
         return $this->renderOutput();
@@ -36,15 +35,15 @@ class ReportController extends AdminController
 
     public function getContent(Request $request,Report $report){
         $reports = $this->service->getAll($request,$report);
+        $charts = $this->service->getContentForChart($request,$report);
         $content = view('admin.reports.table')->with(['models'=>$reports])->render();
-        return response()->json(['content'=>$content]);
+        return response()->json(['content'=>$content,'charts'=>$charts]);
     }
 
     public function getExactlyContent(Request $request){
         $project = Project::findOrFail($request->id);
         $reports = Report::where('project_id',$project->id)->get();
         $content = view('admin.reports.exactly_table')->with(['models'=>$reports])->render();
-//        dd($content);
         return response()->json(['content'=>$content]);
     }
 

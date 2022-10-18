@@ -12,7 +12,7 @@
                 <form action="{{route('reports.content')}}" method="get" class="js-reports-form">
                     <div class="form-group mb-3 row">
                         <div class="col-lg-2">
-                            <select name="project" class="form-control" data-placeholder="Project">
+                            <select name="project" class="form-control select_select2" data-fouc multiple data-placeholder="Project" >
                                 <option value="">Projects</option>
                                 @foreach($projects as $project)
                                     <option value="{{$project->id}}">{{$project->title}}</option>
@@ -42,9 +42,7 @@
                         <th scope="col" style="width: 100px;">More/Less</th>
                     </tr>
                     </thead>
-                    <tbody class="reports-table">
-                        @include('admin.reports.table')
-                    </tbody>
+                    <tbody class="reports-table"></tbody>
                 </table>
             </div>
         </div>
@@ -55,10 +53,43 @@
     <div class="w-75 mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                @include('admin.reports.diagrams')
+                    <canvas id="myChart"></canvas>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var labels = [
+        @foreach($charts as $key => $value)
+            "{{$key}}",
+        @endforeach
+    ];
+
+    var data = {
+        labels: labels,
+        datasets: [{
+            label: 'Reports',
+            backgroundColor: '#000',
+            borderColor: '#000',
+            data: [
+                @foreach($charts as $key => $value)
+                    "{{$value['count']}}",
+                @endforeach
+            ],
+        }]
+    };
+
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {}
+    };
+
+    const myChart = new Chart(
+        document.getElementById('myChart'),
+        config
+    );
+</script>
 
 
