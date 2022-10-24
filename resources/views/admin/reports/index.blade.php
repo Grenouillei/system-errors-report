@@ -9,7 +9,7 @@
     <div class="w-75 mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
-                <form action="{{route('reports.content')}}" method="get" class="js-reports-form">
+                <form action="{{route('reports.index')}}" data-action="{{route('reports.content')}}" method="get" class="js-reports-form">
                     <div class="form-group mb-3 row">
                         <div class="col-lg-2">
                             <select name="project" class="form-control select_select2" data-fouc multiple data-placeholder="Project" >
@@ -29,7 +29,7 @@
                             <button type="button" class="btn btn-danger js-reports-clear w-100">Clear</button>
                         </div>
                         <div class="col-lg-1">
-                            <button type="button" class="btn btn-success js-reports-clear w-100">Export</button>
+                            <button type="submit" class="btn btn-success w-100" name="export" value="1">Export</button>
                         </div>
                     </div>
                 </form>

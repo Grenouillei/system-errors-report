@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ReportExport;
 use App\Models\Project;
 use App\Models\Report;
 use App\Services\ReportService;
@@ -25,6 +26,9 @@ class ReportController extends AdminController
      */
     public function index(Request $request,Report $report)
     {
+        if ($request->export)
+            return $this->service->export($request,$report);
+
         $this->content = view('admin.reports.index')->with([
             'projects'=> Project::all(),
             'charts'=> $this->service->getContentForChart($request,$report),
@@ -41,8 +45,7 @@ class ReportController extends AdminController
     }
 
     public function getExactlyContent(Request $request){
-        $project = Project::findOrFail($request->id);
-        $reports = Report::where('project_id',$project->id)->get();
+        $reports = $this->service->getExactlyContent($request);
         $content = view('admin.reports.exactly_table')->with(['models'=>$reports])->render();
         return response()->json(['content'=>$content]);
     }

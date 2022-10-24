@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Exports\ReportExport;
 use App\Models\Project;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Excel;
 
 class ReportService
 {
@@ -34,10 +36,22 @@ class ReportService
         return $reports;
     }
 
+    public function getExactlyContent(Request $request){
+        $project = Project::findOrFail($request->id);
+        $reports = Report::where('project_id',$project->id)->get();
+        return $reports;
+    }
+
     public function store(Request $request){
         $report = new Report();
         $report->fill($request->only($report->getFillable()));
         $report->project_id = 6;
         $report->save();
+    }
+
+    public function export(Request $request,Report $report)
+    {
+        $reports = $this->getAll($request,$report);
+        return Excel::download(new ReportExport($reports), 'Report-'.now()->format('d-m-Y').'.xlsx');
     }
 }

@@ -26,7 +26,7 @@
     $(document).on('input','.js-reports-form',function (e){
         e.preventDefault();
         $.ajax({
-            url:  $(this).attr('action'),
+            url:  $(this).data('action'),
             method: 'get',
             dataType: 'json',
             data: $(this).serialize(),
@@ -71,7 +71,7 @@
     $(document).on('click','.js-reports-clear',function (e){
         e.preventDefault();
         $.ajax({
-            url:  $('.js-reports-form').attr('action'),
+            url:  $('.js-reports-form').data('action'),
             method: 'get',
             dataType: 'json',
             contentType: 'application/json; charset=utf-8',
