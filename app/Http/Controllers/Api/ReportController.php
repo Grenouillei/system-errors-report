@@ -44,7 +44,7 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        return $request->all();
         try{
             $this->service->store($request);
             return response()->json(['success'=>true]);
