@@ -12,7 +12,7 @@
                 <form action="{{route('reports.index')}}" data-action="{{route('reports.content')}}" method="get" class="js-reports-form">
                     <div class="form-group mb-3 row">
                         <div class="col-lg-2">
-                            <select name="project" class="form-control select_select2" data-fouc multiple data-placeholder="Project" >
+                            <select name="project" class="form-control select_select2" data-fouc data-placeholder="Project" >
                                 <option value="">Projects</option>
                                 @foreach($projects as $project)
                                     <option value="{{$project->id}}">{{$project->title}}</option>
@@ -29,7 +29,7 @@
                             <button type="button" class="btn btn-danger js-reports-clear w-100">Clear</button>
                         </div>
                         <div class="col-lg-1">
-                            <button type="submit" class="btn btn-success w-100" name="export" value="1">Export</button>
+                            <button type="submit" class="btn btn-success w-100" name="export" value="1" disabled>Export</button>
                         </div>
                     </div>
                 </form>

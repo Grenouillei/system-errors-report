@@ -18,4 +18,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('reports',App\Http\Controllers\Api\ReportController::class);
+//Route::post('auth/token/create','Api\Auth\LoginController@login');
+Route::apiResource('reports', App\Http\Controllers\Api\ReportController::class);

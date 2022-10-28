@@ -70,6 +70,7 @@
 
     $(document).on('click','.js-reports-clear',function (e){
         e.preventDefault();
+        $('.js-reports-form')[0].reset();
         $.ajax({
             url:  $('.js-reports-form').data('action'),
             method: 'get',
