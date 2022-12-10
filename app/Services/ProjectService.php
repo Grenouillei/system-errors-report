@@ -6,6 +6,7 @@ use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use App\Models\Report;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProjectService
 {
@@ -17,6 +18,8 @@ class ProjectService
         $project->fill($request->only($project->getFillable()));
             if (!$request->active)
                 $project->active = 0;
+            if (!$project->id)
+                $project->key = Str::random();
         $project->save();
     }
 

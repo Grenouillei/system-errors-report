@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReportRequest;
 use App\Models\Project;
 use App\Services\ReportService;
 use Illuminate\Http\Request;
@@ -42,12 +43,10 @@ class ReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReportRequest $request)
     {
-        return $request->all();
         try{
-            $this->service->store($request);
-            return response()->json(['success'=>true]);
+            return $this->service->store($request);
         }
         catch (\Exception $exception){
             return response()->json($exception);

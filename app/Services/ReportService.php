@@ -43,10 +43,20 @@ class ReportService
     }
 
     public function store(Request $request){
+
+        if ($request->project_key){
+            $project = Project::where('key',$request->project_key)->first();
+                if (!$project)
+                    return response()->json(['success'=>false]);
+        }
+        else
+            return response()->json(['success'=>false]);
+
         $report = new Report();
         $report->fill($request->only($report->getFillable()));
-        $report->project_id = 6;
+        $report->project_id = $project->id;
         $report->save();
+        return response()->json(['success'=>true]);
     }
 
     public function export(Request $request,Report $report)
